@@ -64,6 +64,8 @@ def classify_diabetes():
     diabetes_pedigree_function = float(diabetes_pedigree_function)
     age = int(age)
 
+    # Make changes here for classification
+    # Currently predicts based on random
     random_number = random.choice([0, 1])
 
     # Display result message
