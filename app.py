@@ -4,7 +4,7 @@ import os
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
-import customtkinter
+import customtkinter as ctk
 import tkinter.font as font
 
 
@@ -16,79 +16,119 @@ darkThemeBg = "#dee4e7"
 win = Tk()
 win.title("Diabetes Prediction")
 
-# if 'posix' == os.name:
-#     img = PhotoImage(file="imgs/appIcon.png")
-#     win.iconphoto(True,img)
-# else:
-#     win.iconbitmap("imgs/appIcon.png")
-
 win.iconbitmap("imgs/appIcon.ico")
 
 
-#   Set window size
+win.geometry("{}x{}".format(width, height))
+win.config(bg=darkThemeBg)
 
-win.geometry("{}x{}".format(width, height)) # same as win.geometry("600x400")
-win.config(bg = darkThemeBg)
-
-#   Load images
 lightState = PhotoImage(file="imgs/light.png")
 darkState = PhotoImage(file="imgs/dark.png")
 
-
-
 lightMode = True
 
-#   Canvas that displays home image
-canvas = Canvas(win, width=500,bd=0, highlightthickness=0, relief='ridge', height=350, bg = darkThemeBg)
-canvas.place(x = 50,y =  20)
+canvas = Canvas(win, width=500, bd=0, highlightthickness=0, relief='ridge', height=350, bg=darkThemeBg)
+canvas.place(x=50, y=20)
 homeImg = PhotoImage(file="imgs/diabetesImg.png").subsample(4, 4)
 
-
-# Create the image on the canvas without a box-like background
 canvas.create_image(0, 0, anchor="nw", image=homeImg)
 
-# Insert text beside the image
 canvas.create_text(150, 50, anchor="nw", text="Diabetes Prediction", fill="black", font=("Courier", 18))
 
 
-
-#   Display success message 
 def displayMessageBox(title, description):
-    messagebox.showinfo(title, description)    #   Show success message box
+    messagebox.showinfo(title, description)
 
-#   Switch mode on pressing light or dark button
+
 def switchMode():
     global lightMode
     if lightMode:
-        button.config(image = darkState, bg = lightThemeBg, activebackground=lightThemeBg)
-        canvas.config(bg = lightThemeBg)
-
-        win.config(bg = lightThemeBg)
+        button.config(image=darkState, bg=lightThemeBg, activebackground=lightThemeBg)
+        canvas.config(bg=lightThemeBg)
+        win.config(bg=lightThemeBg)
         lightMode = False
     else:
-        button.config(image = lightState, bg = darkThemeBg, activebackground=darkThemeBg)
-        canvas.config(bg = darkThemeBg)
-
-        win.config(bg = darkThemeBg)
+        button.config(image=lightState, bg=darkThemeBg, activebackground=darkThemeBg)
+        canvas.config(bg=darkThemeBg)
+        win.config(bg=darkThemeBg)
         lightMode = True
 
 
-#   Place theme button with light theme default
-button = Button(win, image=lightState, bd = 0, bg = darkThemeBg, activebackground=darkThemeBg, command = switchMode)
-button.pack(padx=50, pady = 50)
-button.place(x = width - 150, y = 10)
+button = Button(win, image=lightState, bd=0, bg=darkThemeBg, activebackground=darkThemeBg, command=switchMode)
+button.pack(padx=50, pady=50)
+button.place(x=width - 150, y=10)
 
 
-# Use CTkButton instead of tkinter Button for compress and extract button
-# compressButton = customtkinter.CTkButton(master=win, text_color=("black", "black"), text="Compress file",hover=True, hover_color="#0b6eca", width=170,height=50,border_width=0,corner_radius=0,font=("Courier", 12), command={})
-# compressButton.place(x = 3*width/4 , y =height/2 - 30, anchor=CENTER)
+# Labels setup
+labels = [
+    "Pregnancies:", "Glucose:", "Blood Pressure:", "Skin Thickness:",
+    "Insulin:", "BMI:", "Diabetes Pedigree Function:", "Age:"
+]
 
-# checkDiabetesButton = Button(win, text = "Extract File", command = openFileDialogForExtraction)
-# checkDiabetesButton.place(x = 3*width/4 , y =height/2 + 50)
+for i, label_text in enumerate(labels):
+    label = ctk.CTkLabel(win, text=label_text, font=("Helvetica", 15))
+    label.place(x=100, y=200 + i * 40)
 
 
-# Use CTkButton instead of tkinter Button
-checkDiabetesButton = customtkinter.CTkButton(master=win, text="Diabetes Test Result",text_color=("black", "black"),hover=True, hover_color="#0b6eca", width=100,height=40,border_width=0,corner_radius=0,font=("Courier", 12), command={})
-checkDiabetesButton.place(x = 1*width/2 , y =height- 50, anchor=CENTER)
+entry_pregnancies = ctk.CTkEntry(master=win)
+entry_glucose = ctk.CTkEntry(master=win )
+entry_blood_pressure = ctk.CTkEntry(master=win )
+entry_skin_thickness = ctk.CTkEntry(master=win )
+entry_insulin = ctk.CTkEntry(master=win)
+entry_bmi = ctk.CTkEntry(master=win )
+entry_diabetes_pedigree_function = ctk.CTkEntry(master=win)
+entry_age = ctk.CTkEntry(master=win)
+
+entry_pregnancies.place(x=300, y=200)
+entry_glucose.place(x=300, y=240)
+entry_blood_pressure.place(x=300, y=280)
+entry_skin_thickness.place(x=300, y=320)
+entry_insulin.place(x=300, y=360)
+entry_bmi.place(x=300, y=400)
+entry_diabetes_pedigree_function.place(x=300, y=440)
+entry_age.place(x=300, y=480)
+
+# Clear entries
+
+def clear_entries():
+    entry_pregnancies.delete(0, 'end')
+    entry_glucose.delete(0, 'end')
+    entry_blood_pressure.delete(0, 'end')
+    entry_skin_thickness.delete(0, 'end')
+    entry_insulin.delete(0, 'end')
+    entry_bmi.delete(0, 'end')
+    entry_diabetes_pedigree_function.delete(0, 'end')
+    entry_age.delete(0, 'end')
+
+clear_button = ctk.CTkButton(
+    master=win,
+    text="Clear Entries",
+    text_color=("black", "black"),
+    hover=True,
+    hover_color="#0b6eca",
+    width=100,
+    height=40,
+    border_width=0,
+    corner_radius=0,
+    font=("Courier", 12),
+    command=clear_entries
+)
+clear_button.place(x=140, y=height - 50, anchor=CENTER)
+
+
+checkDiabetesButton = ctk.CTkButton(
+    master=win,
+    text="Diabetes Test Result",
+    text_color=("black", "black"),
+    hover=True,
+    hover_color="#0b6eca",
+    width=100,
+    height=40,
+    border_width=0,
+    corner_radius=0,
+    font=("Courier", 12),
+    command={}
+)
+checkDiabetesButton.place(x=width / 2, y=height - 50, anchor=CENTER)
 
 win.mainloop()
