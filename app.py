@@ -8,6 +8,7 @@ import customtkinter as ctk
 import tkinter.font as font
 import random
 global label_text_color 
+from classifier import naiveBayes
 
 width = 800
 height= 600
@@ -64,12 +65,10 @@ def classify_diabetes():
     diabetes_pedigree_function = float(diabetes_pedigree_function)
     age = int(age)
 
-    # Make changes here for classification
-    # Currently predicts based on random
-    random_number = random.choice([0, 1])
-
+    features = [pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree_function, age]
+    result = naiveBayes(features)
     # Display result message
-    if random_number == 1:
+    if result == 1:
         result_message = "The person is diabetic."
         result_color = "red"
     else:
