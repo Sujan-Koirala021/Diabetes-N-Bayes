@@ -116,8 +116,8 @@ def displayMessageBox(title, description):
 
 # Labels setup
 labels = [
-    "Pregnancies:", "Glucose:", "Blood Pressure:", "Skin Thickness:",
-    "Insulin:", "BMI:", "Diabetes Pedigree Function:", "Age:"
+    "Pregnancies:", "Glucose(mg/dl):", "Blood Pressure(mm Hg):", "Skin Thickness(mm):",
+    "Insulin(mu U/m):", "BMI(kg/m2):", "Diabetes Pedigree Function:", "Age(years):"
 ]
 
 label_text_color = "black" if lightMode else "white"
