@@ -28,6 +28,10 @@ This will install all the dependencies listed in the requirements.txt file.
 ### 3. Run application
 ```python app.py```
 
+## Screenshots
+
+![diab](https://github.com/Sujan-Koirala021/Diabetes-N-Bayes/assets/84112374/90e6d4b8-f6f8-4868-ad7b-5774aaec5a62)
+![not_diab](https://github.com/Sujan-Koirala021/Diabetes-N-Bayes/assets/84112374/dc91e4e6-dabf-43ba-a038-f7720911746c)
 
 ## Authors
 
