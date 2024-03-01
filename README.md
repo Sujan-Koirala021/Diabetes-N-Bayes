@@ -25,7 +25,8 @@ This will install all the dependencies listed in the requirements.txt file.
 
 -> Now you are good to go.
 
-
+### 3. Run application
+```python app.py```
 
 
 ## Authors
